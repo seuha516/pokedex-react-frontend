@@ -11,7 +11,7 @@ const [READ, READ_SUCCESS, READ_FAILURE] = createRequestActionTypes('pokedex/REA
 export const initGetListError = createAction(INIT_GETLIST_ERROR);
 export const initReadError = createAction(INIT_READ_ERROR);
 export const getList = createAction(GETLIST, (query) => query);
-export const read = createAction(READ, (num) => num);
+export const read = createAction(READ, ({ num }) => ({ num }));
 
 const getListSaga = createRequestSaga(GETLIST, pokedexAPI.list);
 const readSaga = createRequestSaga(READ, pokedexAPI.read);
@@ -23,7 +23,7 @@ export function* pokedexSaga() {
 
 const initialState = {
   list: null,
-  read: null,
+  data: null,
   getListError: null,
   readError: null,
 };
@@ -48,8 +48,8 @@ const pokedex = handleActions(
     [READ]: (state) => {
       return { ...state, readError: null };
     },
-    [READ_SUCCESS]: (state) => {
-      return { ...state, readError: false };
+    [READ_SUCCESS]: (state, { payload: result }) => {
+      return { ...state, data: result, readError: false };
     },
     [READ_FAILURE]: (state, { payload: error }) => {
       return { ...state, readError: error };
