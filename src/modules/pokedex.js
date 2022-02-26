@@ -11,7 +11,7 @@ const [READ, READ_SUCCESS, READ_FAILURE] = createRequestActionTypes('pokedex/REA
 export const initGetListError = createAction(INIT_GETLIST_ERROR);
 export const initReadError = createAction(INIT_READ_ERROR);
 export const getList = createAction(GETLIST, (query) => query);
-export const read = createAction(READ, ({ num }) => ({ num }));
+export const read = createAction(READ, (num) => num);
 
 const getListSaga = createRequestSaga(GETLIST, pokedexAPI.list);
 const readSaga = createRequestSaga(READ, pokedexAPI.read);

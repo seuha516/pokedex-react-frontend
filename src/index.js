@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer, { rootSaga } from 'modules';
 import 'index.scss';
 
-import App from 'components/App';
+import Base from 'components/Base';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -18,7 +18,7 @@ document.getElementById('root')?.setAttribute('spellcheck', 'false');
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Base />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
